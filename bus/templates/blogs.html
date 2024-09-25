@@ -1,0 +1,144 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Blogs</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+</head>
+<body>
+
+{% block content %}
+<section class="blog-section" id="blogs">
+    <div class="container">
+        <h1 class="section-title text-center mb-5">Our Blogs</h1>
+
+        <!-- Blog Sets -->
+        <div class="row blog-set">
+            <div class="col-md-6">
+                <div class="blog-item shadow">
+                    <div class="d-flex align-items-center">
+                        <img src="{% static 'images/person1.jpg' %}" alt="Author 1" class="img-circle">
+                        <div class="blog-text">
+                            <p><strong>Author 1:</strong> "This is an insightful blog post about our latest services and how they can benefit you."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="blog-item shadow">
+                    <div class="d-flex align-items-center">
+                        <img src="{% static 'images/person2.jpg' %}" alt="Author 2" class="img-circle">
+                        <div class="blog-text">
+                            <p><strong>Author 2:</strong> "Learn more about the new features we've added and how they enhance your experience."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row blog-set d-none">
+            <div class="col-md-6">
+                <div class="blog-item shadow">
+                    <div class="d-flex align-items-center">
+                        <img src="{% static 'images/person3.jpg' %}" alt="Author 3" class="img-circle">
+                        <div class="blog-text">
+                            <p><strong>Author 3:</strong> "Our team's journey through the latest industry trends and insights."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="blog-item shadow">
+                    <div class="d-flex align-items-center">
+                        <img src="{% static 'images/person4.jpg' %}" alt="Author 4" class="img-circle">
+                        <div class="blog-text">
+                            <p><strong>Author 4:</strong> "Discover how our solutions can solve your biggest challenges."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row blog-set d-none">
+            <div class="col-md-6">
+                <div class="blog-item shadow">
+                    <div class="d-flex align-items-center">
+                        <img src="{% static 'images/person5.jpg' %}" alt="Author 5" class="img-circle">
+                        <div class="blog-text">
+                            <p><strong>Author 5:</strong> "An overview of our latest updates and what they mean for you."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="blog-item shadow">
+                    <div class="d-flex align-items-center">
+                        <img src="{% static 'images/person6.jpg' %}" alt="Author 6" class="img-circle">
+                        <div class="blog-text">
+                            <p><strong>Author 6:</strong> "How our innovative solutions are making a difference in the industry."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dots Indicator -->
+        <div class="text-center mt-4">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom Script to Handle Blog Item Toggle and Dot Indicator -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const blogSets = document.querySelectorAll('.blog-set');
+        const dots = document.querySelectorAll('.dot');
+        let currentIndex = 0;
+
+        function showBlogSet(index) {
+            // Hide all blog sets
+            blogSets.forEach(set => set.classList.add('d-none'));
+            // Show the selected blog set
+            blogSets[index].classList.remove('d-none');
+            // Update the dots
+            dots.forEach(dot => dot.classList.remove('active'));
+            if (dots[index]) {
+                dots[index].classList.add('active');
+            }
+        }
+
+        // Automatically toggle blog sets every 5 seconds
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % blogSets.length;
+            showBlogSet(currentIndex);
+        }, 5000); // 5 seconds
+
+        // Handle manual dot click
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.getAttribute('data-index'));
+                currentIndex = index;
+                showBlogSet(index);
+            });
+        });
+
+        // Initialize the first blog set to show
+        showBlogSet(currentIndex);
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+/* blog.css */
+
+/* General styles for the blog-section */
+.blog-section {
+    padding: 50px 0;
+    background-color: #f8f9fa;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+.blog-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.blog-item .d-flex {
+    align-items: center;
+}
+
+.img-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.blog-text {
+    font-size: 1rem;
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #007bff; /* Active dot color */
+}
+
+.dot:hover {
+    background-color: #0056b3; /* Dot hover color */
+}

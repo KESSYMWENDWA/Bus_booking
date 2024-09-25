@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Payment for {{ bus.name }}</h1>
+        <div class="card">
+            <div class="card-body">
+                <p><strong>Route:</strong> {{ bus.route }}</p>
+                <p><strong>Price:</strong> ${{ bus.price }}</p>
+                <p><strong>Seat Number:</strong> {{ booking.seat_number }}</p>
+
+                <form action="{% url 'payment' booking.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Select Payment Method:</label>
+                        <div>
+                            <label class="mr-3">
+                                <input type="radio" name="payment_method" value="card" checked onchange="togglePaymentFields()"> Pay with Card
+                            </label>
+                            <label>
+                                <input type="radio" name="payment_method" value="mpesa" onchange="togglePaymentFields()"> Pay with M-Pesa
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="cardFields">
+                        <div class="form-group">
+                            <input type="text" name="card_number" class="form-control" placeholder="Card Number" maxlength="16" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="text" name="expiry_date" class="form-control" placeholder="Expiry Date (MM/YY)" maxlength="5" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" name="cvc" class="form-control" placeholder="CVC" maxlength="3" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="mpesaFields" style="display:none;">
+                        <div class="form-group">
+                            <input type="text" name="mpesa_message" class="form-control" placeholder="Enter M-Pesa Message" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Pay</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script>
+        function togglePaymentFields() {
+            const cardFields = document.getElementById('cardFields');
+            const mpesaFields = document.getElementById('mpesaFields');
+            if (document.querySelector('input[name="payment_method"]:checked').value === 'card') {
+                cardFields.style.display = 'block';
+                mpesaFields.style.display = 'none';
+            } else {
+                cardFields.style.display = 'none';
+                mpesaFields.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

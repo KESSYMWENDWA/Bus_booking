@@ -1,0 +1,65 @@
+/* bookings.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse; /* Remove space between cells */
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd; /* Light border for table cells */
+}
+
+.table th {
+    background-color: #3498db; /* Header background color */
+    color: white; /* Header text color */
+}
+
+.table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light grey background for even rows */
+}
+
+.btn {
+    margin: 20px 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #3498db; /* Primary button color */
+}
+
+.btn-primary:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+@media print {
+    /* Hide elements that should not be printed */
+    .btn {
+        display: none; /* Hides buttons */
+    }
+    /* Add any additional styles for print here */
+}

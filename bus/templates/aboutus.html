@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
+    <style>
+        /* General Reset and Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f3f3;
+            color: #333;
+        }
+
+        /* About Us Section */
+        .about-us-section {
+            padding: 60px 20px;
+            background-color: #fff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #007bff;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            max-width: 800px;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .about-images {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .about-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mission-section {
+            margin-top: 60px;
+            padding: 40px 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .mission-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .mission-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-content {
+                padding: 0 20px;
+            }
+
+            .about-images {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .about-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .mission-text {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- About Us Section -->
+    <section id="about" class="about-us-section">
+        <h2 class="section-title">About Us</h2>
+        <div class="about-content">
+            <p class="about-text">
+                Welcome to [Your Company Name]! We are a dedicated team of professionals committed to providing 
+                top-notch services in the transportation industry. With years of experience, we pride ourselves 
+                on reliability, customer satisfaction, and a passion for excellence. Our mission is to make your 
+                journeys safer, more comfortable, and convenient.
+            </p>
+            
+            <!-- Team Images (Optional) -->
+            <div class="about-images">
+                <div class="about-image">
+                    <img src="{% static 'images/blog2.jpeg' %}" alt="Team Member 1">
+                </div>
+                <div class="about-image">
+                    <img src="{% static 'images/blog4.jpeg' %}" alt="Team Member 2">
+                </div>
+                <div class="about-image">
+                    <img src="{% static 'images/blog3.webp' %}" alt="Team Member 3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <h2 class="mission-title">Our Mission</h2>
+        <p class="mission-text">
+            Our mission is to revolutionize the transportation experience by combining cutting-edge technology with 
+            exceptional customer service. We believe in building long-term relationships with our customers, 
+            providing them with the best possible travel options and making each journey a memorable one. Whether 
+            you're traveling for business, leisure, or anything in between, we are here to ensure you arrive at your 
+            destination safely and comfortably.
+        </p>
+    </section>
+
+</body>
+</html>

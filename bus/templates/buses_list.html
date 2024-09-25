@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buses</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/buse_page.css' %}">
+</head>
+<body>
+    
+    {% include 'busNav.html' %}
+<section class="buses-section mt-4" id="buses" >
+    <div class="container">
+        <div class="heading text-center mt-4">
+            <h1 class="heading-with-underline">Our Buses</h1>
+        </div>
+        <div class="row">
+            {% for bus in buses %}
+            <div class="col-md-12 mb-4">
+                <div class="card bus-card flex-row shadow">
+                    <!-- Image Section -->
+                    <div class="bus-image">
+                        <img src="{{ bus.image.url }}" alt="{{ bus.name }}" class="img-fluid">
+                    </div>
+                    <!-- Text Section -->
+                    <div class="card-body bus-details d-flex flex-column justify-content-center">
+                        <h3 class="card-title">{{ bus.name }}</h3>
+                        <p class="card-text">{{ bus.description }}</p>
+                        <p class="card-text"><strong>Route:</strong> {{ bus.route }}</p>
+                        <p class="card-text"><strong>Hours of Travel:</strong> {{ bus.hours_of_travel }}</p>
+                        <p class="card-text"><strong>Price:</strong> ${{ bus.price }}</p>
+
+                        <!-- Booking form placed below card body -->
+                        {% if bus.no_of_passengers > 0 %}
+                            <div class="booking-form-container mt-3">
+                                <!-- Form has unique class for targeting -->
+                                <form action="{% url 'book_seat' %}" method="POST" class="booking-form d-flex">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="bus_id" value="{{ bus.id }}">
+                                    <input type="text" class="form-control form-control-sm me-2" placeholder="From" name="from" required>
+                                    <input type="text" class="form-control form-control-sm me-2" placeholder="To" name="to" required>
+                                    <input type="date" class="form-control form-control-sm me-2" name="date" required>
+                                    <select class="form-control form-control-sm me-2" name="seat" required>
+                                        <option value="">Select Seat</option>
+                                        {% for seat in bus.available_seats %}
+                                            <option value="{{ seat }}">{{ seat }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <button type="submit" class="btn btn-primary btn-sm">Book Now</button>
+                                </form>
+                                <!-- Success message container -->
+                                <div id="successMessage-{{ bus.id }}" class="alert alert-success d-none mt-2"></div>
+                            </div>
+                        {% else %}
+                            <p class="text-danger"><strong>Fully Booked</strong></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Booking JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var bookingForms = document.querySelectorAll('.booking-form');
+    
+        bookingForms.forEach(function(bookingForm) {
+            var busId = bookingForm.querySelector('input[name="bus_id"]').value;  // Get the bus ID for each form
+            var successDiv = document.getElementById('successMessage-' + busId);  // Get the corresponding success message div
+    
+            bookingForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+    
+                var formData = new FormData(bookingForm);
+    
+                // Clear any previous success message
+                successDiv.classList.add('d-none');
+                successDiv.innerHTML = '';
+    
+                // Send the booking data via fetch
+                fetch('{% url "book_seat" %}', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);  // Debugging: log the response to check the redirect URL
+                    
+                    if (data.status === 'error') {
+                        // Show an alert message for seat already booked
+                        alert(data.message);
+                    } else if (data.status === 'success') {
+                        // Show the success message
+                        successDiv.innerHTML = '<p>' + data.message + '</p>';
+                        successDiv.classList.remove('d-none');
+    
+                        // Redirect to the payment page
+                        if (data.redirect_url) {
+                            window.location.href = data.redirect_url;
+                        } else {
+                            alert('Payment URL not received. Please try again.');
+                        }
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+    
+    
+    
+</script>
+
+{% include 'footer.html' %}
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+/* buses.css */
+.buses-section {
+    margin-top: 20px; /* Small margin from previous sections */
+}
+
+.box-shadow-container {
+    background-color: #f8f9fa; /* Darker background color */
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Box shadow effect */
+    border-radius: 8px;
+}
+.heading-with-underline {
+    position: relative;
+    display: inline-block;
+    font-size: 2rem; /* Adjust as needed */
+    font-weight: bold;
+}
+
+.heading-with-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px; /* Adjust distance from text */
+    width: 100%;
+    height: 4px; /* Thickness of the underline */
+    background-color: blue; /* Color of the underline */
+}
+
+.custom-hr {
+    border: none; /* Remove default border */
+    border-top: 3px solid blue; /* Blue color for the line */
+    width: 50%; /* Adjust to fit the length of the text */
+    margin: 0 auto; /* Center the hr */
+    margin-top: 10px; /* Space above the hr */
+}
+
+
+
+.text-section {
+    padding: 20px;
+    background-color: #ffffff; /* White background for text */
+    border-radius: 8px;
+}
+
+.text-section h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem; /* Heading size */
+}
+
+.text-section p {
+    margin-bottom: 20px;
+    font-size: 1rem; /* Text size */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Primary button color */
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 0.875rem; /* Small button */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.image-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* Rounded corners for the image */
+}

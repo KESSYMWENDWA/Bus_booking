@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services Section</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/services.css' %}">
+    <style>
+        /* General Reset and Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3; /* Light background for contrast */
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 60px 20px;
+            background-color: #ffffff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .service-title {
+            font-size: 1.5em;
+            margin: 20px 0 10px;
+            color: #007bff;
+        }
+
+        .service-description {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
+            padding: 0 10px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .services-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .service-item {
+                padding: 15px;
+            }
+
+            .service-title {
+                font-size: 1.3em;
+            }
+
+            .service-description {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-container">
+            <div class="service-item">
+                <img src="{% static 'images/premium.jpeg' %}" alt="Service 1" class="service-image">
+                <h3 class="service-title">Premium Bus Travel</h3>
+                <p class="service-description">Experience luxury travel with our premium buses equipped with modern amenities for a comfortable and relaxing journey.</p>
+            </div>
+            <div class="service-item">
+                <img src="{% static 'images/online.avif' %}" alt="Service 2" class="service-image">
+                <h3 class="service-title">Online Booking</h3>
+                <p class="service-description">Book your tickets hassle-free through our online platform with secure payment options and real-time seat availability.</p>
+            </div>
+            <div class="service-item">
+                <img src="{% static 'images/customer.jpeg' %}" alt="Service 3" class="service-image">
+                <h3 class="service-title">24/7 Customer Support</h3>
+                <p class="service-description">Our customer support team is available around the clock to assist you with any inquiries or issues regarding your journey.</p>
+            </div>
+            <div class="service-item">
+                <img src="{% static 'images/charter.jpeg' %}" alt="Service 4" class="service-image">
+                <h3 class="service-title">Charter Services</h3>
+                <p class="service-description">We offer charter bus services for corporate events, group trips, and more. Customize your journey according to your needs.</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

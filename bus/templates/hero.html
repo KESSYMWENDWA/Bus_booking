@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Booking Hero</title>
+    <link rel="stylesheet" href="{% static 'css/hero.css' %}">
+</head>
+<body>
+    <section class="hero-section">
+        <div class="hero-images">
+            <img src="{% static 'images/bus1.jpg' %}" alt="Bus 1" class="hero-image active">
+            <img src="{% static 'images/bus2.jpg'%}" alt="Bus 2" class="hero-image">
+            <img src="{% static 'images/bus3.jpg' %}" alt="Bus 3" class="hero-image">
+            <img src="{% static 'images/hero1.jpg' %}" alt="Bus 4" class="hero-image">
+        </div>
+        <div class="booking-form-container">
+            <div class="booking-form">
+                <form action=" " method="post">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <input type="text" class="form-control" placeholder="From" name="from" required>
+                        <input type="text" class="form-control" placeholder="To" name="to" required>
+                        <input type="text" class="form-control" placeholder="Date" name="date" required>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Book Now</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="experience-section">
+        <div class="experience-container">
+            <div class="experience-content">
+                <h2>Explore Our Top Destinations</h2>
+                <p>Discover popular travel spots with our interactive map. Click on a destination to learn more!</p>
+            </div>
+        </div>
+        
+        <div class="testimonial-section">
+            <h2>What Our Travelers Say</h2>
+            <div class="testimonial-carousel">
+                <div class="testimonial-item">
+                    <p>"An amazing journey! The service was exceptional and the destinations were stunning."</p>
+                    <span>- Alex M.</span>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Great experience from booking to traveling. Highly recommend for a hassle-free trip."</p>
+                    <span>- Jamie L.</span>
+                </div>
+                <!-- Add more testimonials as needed -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.hero-image');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            slideIndex = (slideIndex + 1) % totalSlides;
+            showSlide(slideIndex);
+        }
+
+        showSlide(slideIndex);
+        setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    </script>
+</body>
+</html>

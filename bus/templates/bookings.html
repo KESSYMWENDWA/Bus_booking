@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bookings</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Your Bookings</h1>
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Bus Name</th>
+                    <th>Route</th>
+                    <th>Price</th>
+                    <th>Seat Number</th>
+                    <th>Payment Method</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in payments %}
+                <tr>
+                    <td>{{ payment.bus_name }}</td>
+                    <td>{{ payment.route }}</td>
+                    <td>${{ payment.price }}</td>
+                    <td>{{ payment.seat_number }}</td>
+                    <td>{{ payment.payment_method }}</td>
+                    <td>{{ payment.created_at }}</td>
+                    <td>
+                        <!-- Print Receipt Button -->
+                        <button onclick="printReceipt('{{ payment.id }}')" class="btn btn-primary">Print Receipt</button>
+                    </td>
+                </tr>
+                
+                <!-- Hidden div for receipt content -->
+                <tr id="receipt-{{ payment.id }}" style="display:none;">
+                    <td colspan="7">
+                        <h5>Receipt for Payment {{ payment.id }}</h5>
+                        <p><strong>Bus:</strong> {{ payment.bus_name }}</p>
+                        <p><strong>Route:</strong> {{ payment.route }}</p>
+                        <p><strong>Seat Number:</strong> {{ payment.seat_number }}</p>
+                        <p><strong>Price:</strong> ${{ payment.price }}</p>
+                        <p><strong>Payment Method:</strong> {{ payment.payment_method }}</p>
+                        <p><strong>Date:</strong> {{ payment.created_at }}</p>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center">No bookings found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-center mt-4">
+            <a href="{% url 'buses' %}" class="btn btn-success">Go to Buses</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function printReceipt(paymentId) {
+            // Get the hidden receipt content for the specific payment
+            var receiptContent = document.getElementById('receipt-' + paymentId).innerHTML;
+
+            // Open a new window for the receipt
+            var printWindow = window.open('', '', 'height=400,width=600');
+            printWindow.document.write('<html><head><title>Print Receipt</title>');
+            printWindow.document.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">');  // Load Bootstrap CSS for print
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(receiptContent);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();  // Close the document to apply styling
+            printWindow.print();  // Trigger the print dialog
+        }
+    </script>
+</body>
+</html>
